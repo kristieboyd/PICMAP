@@ -58,6 +58,8 @@ public class MapsActivity extends FragmentActivity
         SupportMapFragment mapFragment =
                 (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+
+
     }
 
     public static final int MY_PERMISSIONS_REQUEST_LOCATION = 1;
@@ -65,13 +67,9 @@ public class MapsActivity extends FragmentActivity
     public boolean checkLocationPermission() {
         if (ContextCompat.checkSelfPermission(this,
                 android.Manifest.permission.ACCESS_COARSE_LOCATION)
-                // If your app does have access to COARSE_LOCATION, then this method will return
-                // PackageManager.PERMISSION_GRANTED//
                 != PackageManager.PERMISSION_GRANTED) {
             if (ActivityCompat.shouldShowRequestPermissionRationale(this,
                     android.Manifest.permission.ACCESS_COARSE_LOCATION)) {
-                // If your app doesn’t have this permission, then you’ll need to request it by calling
-                // the ActivityCompat.requestPermissions method//
                 requestPermissions(new String[] {
                                 android.Manifest.permission.ACCESS_COARSE_LOCATION
                         },
@@ -143,6 +141,17 @@ public class MapsActivity extends FragmentActivity
             buildGoogleApiClient();
             mMap.setMyLocationEnabled(true);
              }
+
+        mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
+        @Override
+        public void onMapClick(LatLng latLng) {
+
+                //Do what you want on obtained latLng
+                Intent intent = new Intent(MapsActivity.this, Tester.class);
+                startActivity(intent);
+            }
+        });
+
     }
 
 
@@ -163,7 +172,7 @@ public class MapsActivity extends FragmentActivity
         if (ContextCompat.checkSelfPermission(this,
                 android.Manifest.permission.ACCESS_COARSE_LOCATION)
                 == PackageManager.PERMISSION_GRANTED) {
-            // Retrieve the user’s last known location
+            // Retrieve last known location
             LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient,
                     mLocationRequest, this);
         }
@@ -211,4 +220,6 @@ public class MapsActivity extends FragmentActivity
             }
         }
     }
+
+
 }
