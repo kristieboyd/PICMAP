@@ -50,9 +50,11 @@
             android:label="@string/title_activity_maps"></activity>
 
         <activity
-            android:name=".photoSelect" />
-        <activity
             android:name=".editPhotosOptions" />
+
+        <activity
+            android:name=".photoSelect" />
+
         <activity
             android:name=".addFilter" />
 
