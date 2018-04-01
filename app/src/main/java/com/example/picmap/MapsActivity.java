@@ -88,15 +88,15 @@ public class MapsActivity extends FragmentActivity
         }
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-    }
+    //@Override
+    //protected void onResume() {
+     //   super.onResume();
+    //}
 
-    @Override
-    protected void onPause() {
-        super.onPause();
-    }
+    //@Override
+    //protected void onPause() {
+    //    super.onPause();
+    //}
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
@@ -115,18 +115,6 @@ public class MapsActivity extends FragmentActivity
         catch (Resources.NotFoundException e) {
             Log.e("MapsActivity", "Can't find style. Error: ", e);
         }
-
-        //Bitmap icon = BitmapFactory.decodeResource(getResources(), R.drawable.disney);
-        BitmapDrawable bitmapdraw=(BitmapDrawable)getResources().getDrawable(R.drawable.disney);
-        Bitmap b=bitmapdraw.getBitmap();
-        Bitmap smallMarker = Bitmap.createScaledBitmap(b, 100, 100, false);
-        // Add a marker in Sydney and move the camera
-        LatLng DISNEY = new LatLng(28.41167,-81.5826);
-        mMap.addMarker(new MarkerOptions().position(DISNEY).title("Marker at DISNEY").icon(BitmapDescriptorFactory.fromBitmap(smallMarker)));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(DISNEY));
-
-
-
 
         if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.M) {
             if (ContextCompat.checkSelfPermission(this,
@@ -147,8 +135,27 @@ public class MapsActivity extends FragmentActivity
         public void onMapClick(LatLng latLng) {
 
                 //Do what you want on obtained latLng
-                Intent intent = new Intent(MapsActivity.this, Tester.class);
+                Intent intent = new Intent(MapsActivity.this, editPhotosOptions.class);
                 startActivity(intent);
+
+            // Creating a marker
+            MarkerOptions markerOptions = new MarkerOptions();
+
+            // Setting the position for the marker
+            markerOptions.position(latLng);
+
+            // Setting the title for the marker.
+            // This will be displayed on taping the marker
+            markerOptions.title(latLng.latitude + " : " + latLng.longitude);
+
+            // Clears the previously touched position
+            mMap.clear();
+
+            // Animating to the touched position
+            mMap.animateCamera(CameraUpdateFactory.newLatLng(latLng));
+
+            // Placing a marker on the touched position
+            mMap.addMarker(markerOptions);
             }
         });
 
