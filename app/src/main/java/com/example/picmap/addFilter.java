@@ -1,6 +1,5 @@
 package com.example.picmap;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -13,9 +12,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.InputStream;
 
 
 public class addFilter extends photoSelect {
@@ -29,7 +26,7 @@ public class addFilter extends photoSelect {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.filters);
         imgMain = (ImageView) findViewById(R.id.effect_main);
-         src = getImageBitmap(); //BitmapFactory.decodeResource(getResources(), R.drawable.disney);
+         src = getImageBitmap();
 
     }
     public void buttonClicked(View v){
