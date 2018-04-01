@@ -23,10 +23,18 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/picmapicon"
         android:supportsRtl="true"
-        android:theme="@style/Theme.AppCompat">
+        android:theme="@style/Theme.AppCompat.NoActionBar">
+        <activity
+            android:name=".Splashscreen"
+            android:theme="@android:style/Theme.DeviceDefault.Light.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".LoginActivity"
-            android:label="@string/app_name">
+            android:label="">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -50,15 +58,17 @@
             android:label="@string/title_activity_maps"></activity>
 
         <activity
-            android:name=".editPhotosOptions" />
+            android:name=".editPhotosOptions"/>
+
 
         <activity
-            android:name=".photoSelect" />
+            android:name=".photoSelect"/>
 
         <activity
-            android:name=".addFilter" />
+            android:name=".addFilter"/>
 
-        <activity android:name=".locationOptions"/>
+        <activity
+            android:name=".locationOptions"/>
     </application>
 
 </manifest>
