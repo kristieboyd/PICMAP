@@ -18,9 +18,9 @@ public class locationOptions extends AppCompatActivity {
 
     public void display(View view) {
         //Toast.makeText(this, "Coming Soon!", Toast.LENGTH_LONG).show();
-        //Intent myIntent = new Intent(view.getContext(), openData.class);
-        //startActivity(myIntent);
-        //finish();
+        Intent myIntent = new Intent(view.getContext(), openData.class);
+        startActivity(myIntent);
+        finish();
     }
 
     public void editPhotos(View view) {

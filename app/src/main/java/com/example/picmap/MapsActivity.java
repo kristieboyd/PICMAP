@@ -166,7 +166,7 @@ public class MapsActivity extends FragmentActivity
         @Override
         public void onMapClick(LatLng point) {
             //Do what you want on obtained latLng
-            Intent intent = new Intent(MapsActivity.this, editPhotosOptions.class);
+            Intent intent = new Intent(MapsActivity.this, locationOptions.class);
             startActivity(intent);
             locationCount++;
 
@@ -216,6 +216,17 @@ public class MapsActivity extends FragmentActivity
                 locationCount=0;
             }
         });
+
+        googleMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+            @Override
+            public boolean onMarkerClick(Marker marker) {
+                //Do what you want on obtained marker
+                Intent intent = new Intent(MapsActivity.this, locationOptions.class);
+                startActivity(intent);
+                return false;
+            }
+        });
+
     }
 
     protected synchronized void buildGoogleApiClient() {

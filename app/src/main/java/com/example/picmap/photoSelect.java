@@ -28,7 +28,6 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 
-
 public class photoSelect extends LoginActivity{
     private static final String TAG = "photoSelect";
     private static final int PHOTO_SELECT_CODE = 1;
@@ -61,7 +60,8 @@ public class photoSelect extends LoginActivity{
                         InputStream imageStream = getContentResolver().openInputStream(imageUri);
                         bitmapToSave = BitmapFactory.decodeStream(imageStream);
 
-                        editPhoto(); //saveFile(); //saveFileToDrive();
+                        selectedPhoto(); //saveFile(); //saveFileToDrive();
+
                     } catch (FileNotFoundException e) {
                         e.printStackTrace();
                     }
@@ -69,15 +69,17 @@ public class photoSelect extends LoginActivity{
         }}
     }
 
-    private void editPhoto() {
+    private void selectedPhoto() {
         setContentView(R.layout.photo);
         pic = (ImageView) findViewById(R.id.pic);
         pic.setImageURI(imageUri);
+
     }
 
     public static Bitmap getImageBitmap() {
             return bitmapToSave;
     }
+
     public void setImage(Bitmap newImage) {
         System.out.println("HELLO");
         System.out.println(newImage);
@@ -96,19 +98,20 @@ public class photoSelect extends LoginActivity{
         Toast.makeText(this, "Image Saved", Toast.LENGTH_LONG).show();
         finish();
 
-/*
         final Bitmap image = bitmapToSave;
         final Task<DriveFolder> appFolderTask = getDriveResourceClient().getAppFolder();
         final Task<DriveContents> createContentsTask = getDriveResourceClient().createContents();
+        System.out.println("1");
 
         //Wait for task completion
         Tasks.whenAll(appFolderTask, createContentsTask)
                 .continueWithTask(new Continuation<Void, Task<DriveFile>>() {
                     @Override
                     public Task<DriveFile> then(@NonNull Task<Void> task) throws Exception {
+                        System.out.println("2");
                         DriveFolder parent = appFolderTask.getResult();
                         DriveContents contents = createContentsTask.getResult();
-
+                        System.out.println("3");
                         ByteArrayOutputStream bitmapStream = new ByteArrayOutputStream();
                         image.compress(Bitmap.CompressFormat.PNG, 100, bitmapStream);
                         try {
@@ -121,7 +124,11 @@ public class photoSelect extends LoginActivity{
                                 .setTitle("photo.png")
                                 .setStarred(true)
                                 .build();
-                        return getDriveResourceClient().createFile(parent, changeSet, contents);
+                        System.out.println("4");
+                        Task<DriveFile> file = getDriveResourceClient().createFile(parent, changeSet, contents);
+                        finish();
+
+                        return file;
                     }
                 })
                 .addOnFailureListener(this, new OnFailureListener() {
@@ -130,6 +137,6 @@ public class photoSelect extends LoginActivity{
                         Log.e(TAG, "Unable to create file", e);
                         finish();
                     }
-                });*/
+                });
     }
 }

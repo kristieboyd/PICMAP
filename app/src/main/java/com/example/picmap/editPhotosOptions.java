@@ -5,10 +5,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
-/**
- * Created by Dell on 2018-03-29.
- */
-
 public class editPhotosOptions extends locationOptions {
 
     @Override
@@ -22,9 +18,4 @@ public class editPhotosOptions extends locationOptions {
         startActivity(myIntent);
         finish();
     }
-
-    public void delete(View view) {
-        Toast.makeText(this, "Coming Soon!", Toast.LENGTH_LONG).show();
-    }
-
 }

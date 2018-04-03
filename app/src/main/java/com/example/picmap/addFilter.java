@@ -38,12 +38,8 @@ public class addFilter extends photoSelect {
             Toast.makeText(this, "Image Saved",
                     Toast.LENGTH_LONG).show();
             finish();
-            //Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);
-            //photoPickerIntent.setType("image/*");
-            //startActivityForResult(photoPickerIntent, SELECT_PHOTO);
         }
-//        else if(v.getId() == R.id.effect_highlight)
-//            saveBitmap(imgFilter.applyHighlightEffect(src), "effect_highlight");
+
         else if(v.getId() == R.id.effect_black)
             saveBitmap(imgFilter.applyBlackFilter(src),"effect_black");
         else if(v.getId() == R.id.effect_boost_1)
@@ -84,8 +80,6 @@ public class addFilter extends photoSelect {
             saveBitmap(imgFilter.applyInvertEffect(src),"effect_invert");
         else if(v.getId() == R.id.effect_mean_remove)
             saveBitmap(imgFilter.applyMeanRemovalEffect(src),"effect_mean_remove");
-//        else if(v.getId() == R.id.effect_reflaction)
-//            saveBitmap(imgFilter.applyReflection(src),"effect_reflaction");
         else if(v.getId() == R.id.effect_round_corner)
             saveBitmap(imgFilter.applyRoundCornerEffect(src, 45),"effect_round_corner");
         else if(v.getId() == R.id.effect_saturation)

@@ -1,8 +1,5 @@
 package com.example.picmap;
 
-/**
- * Created by kpbird on 27/08/13.
- */
 import android.graphics.Bitmap;
 import android.graphics.Color;
 

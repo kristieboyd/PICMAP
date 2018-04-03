@@ -24,6 +24,8 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.common.api.Scope;
 import com.google.android.gms.common.api.Status;
+import com.google.android.gms.drive.Drive;
+import com.google.android.gms.drive.DriveResourceClient;
 
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener, GoogleApiClient.OnConnectionFailedListener {
@@ -36,6 +38,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private ImageView Prof_Pic;
     private GoogleApiClient googleApiClient;
     private static final int REQ_CODE = 9001;
+    private static DriveResourceClient driveResourceClient;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +58,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         MapButton.setVisibility(View.GONE);
         GoogleSignInOptions signInOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestScopes(new Scope(Scopes.DRIVE_APPFOLDER))
+                .requestScopes(Drive.SCOPE_FILE)
+                .requestScopes(Drive.SCOPE_APPFOLDER)
                 .requestEmail()
                 .build();
         googleApiClient = new GoogleApiClient.Builder(this).enableAutoManage(this, this).addApi(Auth.GOOGLE_SIGN_IN_API, signInOptions).build();
@@ -96,7 +101,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private void handleResult(GoogleSignInResult result) {
         GoogleSignInAccount account = result.getSignInAccount();
         if (result.isSuccess() && GoogleSignIn.hasPermissions(account, new Scope(Scopes.DRIVE_APPFOLDER))) { //if (result.isSuccess())
-            //GoogleSignInAccount account = result.getSignInAccount();
+
+            driveResourceClient = Drive.getDriveResourceClient(this, GoogleSignIn.getLastSignedInAccount(this));
             String name = account.getDisplayName();
             String email = account.getEmail();
             Uri img_url = account.getPhotoUrl();
@@ -136,6 +142,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         Intent myIntent = new Intent(view.getContext(), MapsActivity.class);
         startActivityForResult(myIntent, 0);
 
+    }
+    public static DriveResourceClient getDriveResourceClient() {
+        return driveResourceClient;
     }
 
 }
